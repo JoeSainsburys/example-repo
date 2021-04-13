@@ -1,0 +1,8 @@
+name: main
+on:
+  push:
+jobs:
+  main:
+    runs-on: [self-hosted]
+    steps:
+      - run: sleep 2m; echo Finished
