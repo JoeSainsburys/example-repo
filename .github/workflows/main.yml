@@ -12,4 +12,4 @@ jobs:
           repository: JoeSainsburys/dispatch-test
           token: ${{ secrets.PAT }}
           event-type: onboarding_pr
-          client-payload: '{"sourcePrNumber": "${{ github.event.number }}", "sourceBaseRef": "${{ github.base_ref }}", "sourceHeadRef": "${{ github.head_ref }}", "sourceOwner": "${{ github.event.repository.owner }}", "sourceRepo": "${{ github.event.repository.name }}"'
+          client-payload: '{"sourcePrNumber": "${{ github.event.number }}", "sourceBaseRef": "${{ github.base_ref }}", "sourceHeadRef": "${{ github.head_ref }}", "sourceOwner": "${{ github.event.repository.owner.name }}", "sourceRepo": "${{ github.event.repository.name }}" }'
