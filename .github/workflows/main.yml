@@ -1,9 +1,15 @@
 name: main
 on:
-  repository_dispatch:
+  pull_request:
 jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - run: echo Finished
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          repository: JoeSainsburys/dispatch-test
+          token: ${{ secrets.PAT }}
+          event-type: onboarding_pr
+          client-payload: '{"sourcePrNumber": "${{ github.event.number }}", "sha": "${{ github.sha }}"}'
 
