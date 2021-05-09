@@ -5,15 +5,10 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - name: Set UUID
-        id: generate-uuid
-        uses: filipstefansson/uuid-action@v1
-      - uses: felixp8/dispatch-and-wait@v0.1.0
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1
         with:
-          owner: JoeSainsburys
-          repo: dispatch-test
+          repository: JoeSainsburys/dispatch-test
           token: ${{ secrets.PAT }}
-          event_type: onboarding_pr
-          client_payload: '{"sourcePrNumber": "${{ github.event.number }}", "sha": "${{ github.sha }}", "uuid": "${{ steps.generate-uuid.outputs.uuid }}"}'
-          wait_time: 5
-          max_time: 120
+          event-type: onboarding_pr
+          client-payload: '{"sourcePrNumber": "${{ github.event.number }}", "sha": "${{ github.sha }}"}, "sourceOwner": "${{ context.repo.owner }}", "sourceRepo": "${{ context.repo.repo }}"'
