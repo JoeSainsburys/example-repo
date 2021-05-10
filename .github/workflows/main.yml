@@ -6,12 +6,13 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - run: printenv
-      # TODO: maybe wait - see history
       - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v1
+        uses: felixp8/dispatch-and-wait@v0.1.0
         with:
-          repository: JoeSainsburys/dispatch-test
+          owner: JoeSainsburys
+          repo: dispatch-test
           token: ${{ secrets.PAT }}
-          event-type: onboarding_pr
-          client-payload: '{"sourcePrNumber": "${{ github.event.number }}", "sourceBaseRef": "${{ github.base_ref }}", "sourceHeadRef": "${{ github.head_ref }}", "sourceOwner": "${{ github.repository_owner }}", "sourceRepo": "${{ github.event.repository.name }}" }'
+          event_type: onboarding_pr
+          client_payload: '{"sourcePrNumber": "${{ github.event.number }}", "sourceBaseRef": "${{ github.base_ref }}", "sourceHeadRef": "${{ github.head_ref }}", "sourceOwner": "${{ github.repository_owner }}", "sourceRepo": "${{ github.event.repository.name }}" }'
+          wait_time: 5
+          max_time: 120
